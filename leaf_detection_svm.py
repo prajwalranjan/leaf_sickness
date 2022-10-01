@@ -93,11 +93,13 @@ print('The Model is trained well with the given images')
 # model.best_params_ contains the best parameters obtained from GridSearchCV
 
 # save model
-filename = 'classifier_model.sav'
-pickle.dump(model, open(filename, 'wb'))
+filename = 'classifier_model.pkl'
+with open(filename, 'rb') as file:
+    pickle.dump(model, file)
 
-# to open loaded model-
-# loaded_model = pickle.load(open(filename, 'rb'))
+# to open saved model-
+# with open(pkl_filename, 'rb') as file:
+    # pickle_model = pickle.load(file)  
 
 # url=input('Enter URL of Image :')
 url = "sick_leaf.jpg"

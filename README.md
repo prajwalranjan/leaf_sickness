@@ -4,7 +4,7 @@
 
 * RAM: 24 GB
 
-* Install required libraries: "pip install -r requirements.txt"
+* Install dependencies: "pip install -r requirements.txt"
 
 * Generate Classifier model by running: "python generate_model.py"
 

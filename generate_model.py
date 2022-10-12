@@ -94,7 +94,7 @@ print('The Model is trained well with the given images')
 
 # save model
 filename = 'classifier_model.pkl'
-with open(filename, 'rb') as file:
+with open(filename, 'wb') as file:
     pickle.dump(model, file)
 
 # to open saved model-

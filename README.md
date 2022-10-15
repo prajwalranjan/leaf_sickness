@@ -8,4 +8,4 @@
 
 * Generate Classifier model by running: "python generate_model.py"
 
-* Replace "leaf.jpg" in "test_images" folder and run "python predict.py" to get required prediction
+* Save the image (to be tested) as a jpg file in "test_images" folder and run "python predict.py" to get required prediction. Enter the name of the image along with ".jpg" when running the program

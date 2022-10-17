@@ -56,7 +56,8 @@ CATEGORIES = {
     "spider_mites": "Spider Mites",
 }
 
-test_folder = 'test_images'
+# test_folder = 'test_images'
+test_folder = "custom_test/tomato"
 
 model_name = 'classifier_model.pkl'
 
@@ -79,14 +80,22 @@ def predict_image():
     loading = tkinter.Label(root, text="Loading...", font=('calibre', 10, 'normal'))
     loading.grid(row=1, column=0)
 
-    # entry_label = tkinter.Label(root, text="Image: ", font=('calibre', 10, 'normal'))
-    # entry_label.grid(row=3, column=0)
+    
 
     # temp_img = ImageTk.PhotoImage(Image.open(os.path.join(test_folder, filename)))
-    # img_label = tkinter.Label(root, image=temp_img)
-    # img_label.grid(row=3, column=1)
 
     filename = filename_variable.get()
+
+    temp_image = Image.open(os.path.join(test_folder, filename))
+    resized_temp_image = temp_image.resize((150, 150))
+    photo = ImageTk.PhotoImage(resized_temp_image)
+ 
+    entry_label = tkinter.Label(root, text="Image: ", font=('calibre', 10, 'normal'))
+    entry_label.grid(row=2, column=2)
+    
+    img_label = tkinter.Label(root, image=photo)
+    img_label.photo = photo
+    img_label.grid(row=3, column=2)
 
     img = imread(os.path.join(test_folder, filename))
     img_resized = resize(img, (150, 150, 3))
@@ -97,6 +106,8 @@ def predict_image():
     intro_label.grid(row=5, column=0)
 
     row = 7
+
+    final_vals = []
     
     for ind, val in enumerate(Categories):
         type_label = tkinter.Label(root, text=CATEGORIES[val], font=('calibre', 10, 'normal'))
@@ -107,10 +118,29 @@ def predict_image():
         probs_label.grid(row=row, column=1)
         row += 1
 
-    prediction = CATEGORIES[Categories[model.predict(l)[0]]]
+        final_vals.append([val, prob])
+
+    sorted_final_vals = sorted(final_vals, key=lambda x: x[1], reverse=True)
+
+    # def get_prediction(probabilities):
+    #     max_p = 0
+    #     for i in range(1, len(probabilities)):
+    #         if probabilities[i] > probabilities[max_p]:
+    #             max_p = i
+    #     return max_p
+    
+    # prediction = CATEGORIES[Categories[model.predict(l)[0]]]
+
+    # acc_pred = get_prediction(probabilities=probability)
+
+    acc_pred = sorted_final_vals[0][0]
+
+    # prediction = CATEGORIES[Categories[acc_pred]]
+
+    prediction = CATEGORIES[acc_pred]
 
     pred_label = tkinter.Label(root, text="Predicted leaf condition: "+prediction, font=('calibre', 15, 'bold'))
-    pred_label.grid(row=row+2, column=0)
+    pred_label.grid(row=row+2, column=2)
 
     close_button = tkinter.Button(root, text="Exit", command=root.destroy)
     close_button.grid(row=row+4, column=1)

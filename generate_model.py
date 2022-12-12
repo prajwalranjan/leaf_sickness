@@ -17,20 +17,20 @@ Categories = [
     "healthy",
     "powdery_mildew",
     "cercospora_leaf_spot_gray_leaf_spot",
-    # "bacterial_spot",
-    # "early_blight",
-    # "late_blight",
-    # "target_spot",
-    # "common_rust",
-    # "esca_black_measles",
-    # "leaf_blight",
-    # "septoria_leaf_spot",
-    # "tomato_mosaic_virus",
-    # "leaf_mold",
-    # "leaf_scorch",
-    # "tomato_yellow_leaf_curl_virus",
-    # "haunglongbing_citrus_greening",
-    # "spider_mites",
+    "bacterial_spot",
+    "early_blight",
+    "late_blight",
+    "target_spot",
+    "common_rust",
+    "esca_black_measles",
+    "leaf_blight",
+    "septoria_leaf_spot",
+    "tomato_mosaic_virus",
+    "leaf_mold",
+    "leaf_scorch",
+    "tomato_yellow_leaf_curl_virus",
+    "haunglongbing_citrus_greening",
+    "spider_mites",
 ]
 
 flat_data_arr = [] #input array
@@ -75,10 +75,6 @@ param_grid = {
     'kernel':['rbf', 'poly'],
 }
 svc = svm.SVC(probability=True, verbose=True, kernel='rbf')
-# xgb_cl = xgb.XGBClassifier(objective='binary:logistic')
-# model = GridSearchCV(svc, param_grid, cv=5, verbose=1, n_jobs=-1)
-# model = HalvingGridSearchCV(xgb_cl, param_grid, n_jobs=1, min_resources="exhaust", factor=3, verbose=2)
-# model = RandomizedSearchCV(estimator=svc, param_distributions=param_grid, verbose=1)
 model = OneVsRestClassifier(svc, verbose=1, n_jobs=-1)
 
 from sklearn.model_selection import train_test_split

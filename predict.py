@@ -140,10 +140,10 @@ def predict_image():
     prediction = CATEGORIES[acc_pred]
 
     pred_label = tkinter.Label(root, text="Predicted leaf condition: "+prediction, font=('calibre', 15, 'bold'))
-    pred_label.grid(row=row+2, column=2)
+    pred_label.grid(row=row+4, column=2)
 
     close_button = tkinter.Button(root, text="Exit", command=root.destroy)
-    close_button.grid(row=row+4, column=1)
+    close_button.grid(row=row+6, column=1)
 
 
 file_label = tkinter.Label(root, text="Enter filename: ", font=('calibre', 10, 'normal'))

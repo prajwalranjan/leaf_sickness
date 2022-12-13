@@ -56,13 +56,26 @@ CATEGORIES = {
     "spider_mites": "Spider Mites",
 }
 
+Type_Categories = [
+    "apple",
+    "corn",
+    "grape",
+    "none",
+    "potato",
+    "tomato"
+]
+
 # test_folder = 'test_images'
 test_folder = "custom_test/tomato"
 
 model_name = 'classifier_model.pkl'
+type_model_name = 'type_classifier_model.pkl'
 
 with open(model_name, 'rb') as file:
     model = pickle.load(file)
+
+with open(type_model_name, 'rb') as file:
+    type_model = pickle.load(file)
 
 test_img = 'leaf.jpg'
 
@@ -139,11 +152,14 @@ def predict_image():
 
     prediction = CATEGORIES[acc_pred]
 
+    crop_type_label = tkinter.Label(root, text="Crop Type: "+Type_Categories[type_model.predict(l)[0]], font=('calibre', 10, 'normal'))
+    crop_type_label.grid(row=row+4, column=2)
+    
     pred_label = tkinter.Label(root, text="Predicted leaf condition: "+prediction, font=('calibre', 15, 'bold'))
-    pred_label.grid(row=row+4, column=2)
+    pred_label.grid(row=row+6, column=2)
 
     close_button = tkinter.Button(root, text="Exit", command=root.destroy)
-    close_button.grid(row=row+6, column=1)
+    close_button.grid(row=row+8, column=1)
 
 
 file_label = tkinter.Label(root, text="Enter filename: ", font=('calibre', 10, 'normal'))
